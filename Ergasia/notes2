@@ -1,0 +1,22 @@
+6103752 kB
+6250242048 bytes
+
+*0.75 = 4687681536 bytes
+
+set global innodb_buffer_pool_size=4687681536;
+
+Telika egine: 4697620480
+
+kathe fora na pataw:
+set global innodb_buffer_pool_size=4697620480;
+
+show variables like 'innodb_buffer_pool_size';
+
+https://askubuntu.com/questions/57381/how-to-stop-mysql-from-running-at-boot-time
+sudo systemctl disable mysql
+
+NEWWWWWWWWWWWW
+set global innodb_buffer_pool_size=6554;
+
+show variables like 'innodb_buffer_pool_size';
+WWWWWWWWWWWWWW

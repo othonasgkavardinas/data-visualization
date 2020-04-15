@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+</head>
+
+<body></body>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<script>
+
+d3.json("res.json").then(data => {
+
+	if(!data[0].length) {
+                document.body.innerHTML += '<p>No results found</p>';
+                return;
+        }
+
+	var color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+
+	for(i=0; i<data.length; i++)
+                data[i].forEach(d => {
+                        d.M_Value = parseFloat(d.M_Value);
+                        d.Years_Y_ID = +d.Years_Y_ID;
+                });
+
+	console.log(data);
+
+	var margin = { top: 50, right: 50, bottom: 50, left: 100 }
+       		, width = window.innerWidth - margin.left - margin.right
+        	, height = window.innerHeight - margin.top - margin.bottom;
+
+	var xScale = d3.scaleLinear()
+		.domain([0, d3.max(data[0], d => d.M_Value)])
+		.range([0, width]);
+
+	var yScale = d3.scaleLinear()
+		.domain([0, d3.max(data[1], d => d.M_Value)])
+		.range([height, 0]);
+
+	var svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(xScale));
+        
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(d3.axisLeft(yScale));
+
+	var l1 = [];
+	console.log(data[0].length);
+	for(var i=0; i<data[0].length; i++)
+		l1.push({value1:data[0][i].M_Value, value2:data[1][i].M_Value})
+
+	var circles = svg.selectAll("circle")
+		.data(l1)
+	      .enter().append("circle")
+		.attr("cx", d => xScale(d.value1))
+		.attr("cy", d => yScale(d.value2))
+		.attr("r", 5)
+		.attr("stroke", "black")
+		.attr("stroke-width", 1)
+		.attr("fill", color);
+
+	svg.append("g").selectAll("dots")
+                .data([data[0][0].C_Name])
+              .enter().append("rect")
+                .attr("x", -100)
+                .attr("y", (d, i) => height -25 - i*15)
+                .attr("width", 10)
+                .attr("height", 10)
+                .style("fill", color);
+
+	svg.append("g").selectAll("labels")
+                .data([data[0][0].C_Name])
+              .enter().append("text")
+                .attr("x", -85)
+                .attr("y", (d, i) => height -15 - i*15)
+                .text(d => d)
+                .attr("text-anchor", "left")
+                .attr("font-size", 10)
+                .attr("font-family", "sans-serif")
+                .style("alignment-baseline", "middle");
+
+	svg.append("g")
+              .append("text")
+                .attr("x", -100)
+                .attr("y", -10)
+                .text(data[0][0].M_Category + " (" + data[0][0].M_Type + ")");
+
+	svg.append("g")
+              .append("text")
+                .attr("x", width-300)
+                .attr("y", height-10)
+                .text(data[1][0].M_Category + " (" + data[1][0].M_Type + ")");
+
+	svg.append("g")
+              .append("text")
+                .attr("x", -85)
+                .attr("y", height-5)
+                .attr("text-anchor", "left")
+                .attr("font-size", 10)
+                .attr("font-family", "sans-serif")
+		.text(d3.min(data[0], d => d.Years_Y_ID) + "-" + d3.max(data[0], d=> d.Years_Y_ID))
+                .style("alignment-baseline", "middle");
+
+
+});
+
+</script>
+
+
+</html>
