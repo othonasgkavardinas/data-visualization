@@ -8,7 +8,7 @@
 Εκφώνηση: files/Project-2018-2019.pdf  
 Πλήρης περιγραφή: files/Report.pdf
 
-### /etl
+### /ETL
 Χρησιμοποιήθηκαν τα scripts: ETL/create_files.py, ETL/fill_matrices.py
 
 ### /application
