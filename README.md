@@ -1,1 +1,1 @@
-# databases2-assignment
+# data-visualization-assignment
