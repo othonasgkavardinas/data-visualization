@@ -19,10 +19,11 @@
 2. Move files/Dump20190529.sql to xampp folder. (c:\\xampp)
 3. Start MySQL and in shell type the following:  
 ```
-mysql -u root -p
-create database mydb;
-exit
-mysql -u root -p mydb < Dump20190529.sql
+# mysql -u root -p
+(hit 'Enter' if no password added)
+> create database mydb;
+> exit
+# mysql -u root -p mydb < Dump20190529.sql
 ```
 4. Move application/myFiles to xampp/htdocs. (c:\\xampp\\htdocs)
 5. Open your browser and browse localhost/myFiles.
