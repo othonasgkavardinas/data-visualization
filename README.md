@@ -29,5 +29,5 @@
 5. Open your browser and browse localhost/myFiles.
 
 ### Tested on
-Windows 10
+Windows 10  
 XAMPP 7.4.4
