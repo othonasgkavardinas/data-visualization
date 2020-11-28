@@ -1,4 +1,4 @@
-# data-visualization-assignment
+# data-visualization
 
 ## Εφαρμογή Οπτικοποίησης Δεδομένων
 
